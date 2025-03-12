@@ -32,7 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased  flex flex-col h-dvh`}
       >
         <Header />
-        <div className="grow">{children}</div>
+        <div className="grow px-2">{children}</div>
         <Suspense fallback={<div>loading about</div>}>
           <AboutPage />
         </Suspense>
