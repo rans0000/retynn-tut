@@ -1,6 +1,7 @@
 "use client";
 
 import { myAction } from "@/actions/servercalls";
+import { useTimer } from "@/utils/hooks";
 import { TFormData } from "@/utils/types";
 import { useActionState } from "react";
 
@@ -12,8 +13,15 @@ function ContactForm() {
     initialData
   );
 
+  const { a, updateValue } = useTimer(200);
+
   return (
     <div>
+      Timer is {a}
+      <br />
+      <button type="button" onClick={() => updateValue(5)}>
+        Update
+      </button>
       <form action={formAction} className="flex flex-col gap-1 w-max">
         <input
           type="text"
