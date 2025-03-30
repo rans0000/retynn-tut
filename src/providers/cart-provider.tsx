@@ -44,7 +44,7 @@ const reducer = (state: TCartState, action: TCartAction): TCartState => {
         total: 0,
         discount: 1,
       };
-      break;
+      return state;
 
     case "toggle_item":
       const index = state.items.findIndex(
