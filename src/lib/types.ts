@@ -1,3 +1,6 @@
+/**
+ * All types have a 'T' prefix as a convention, to designate a type or interface
+ */
 export type TItem = {
   id: number;
   title: string;
@@ -12,3 +15,13 @@ export type TAuthFormState = {
   email: string;
   error?: string;
 };
+
+export type TCartState = {
+  items: TItem[];
+  sum: number;
+  total: number;
+  discount: number;
+};
+export type TCartAction =
+  | { type: "set_items"; payload: TItem[] }
+  | { type: "toggle_item"; payload: TItem };
