@@ -16,7 +16,7 @@ type TSore = {
 };
 
 // this is the cart value
-const initialValue: TCartState = { items: [], sum: 0, total: 0, discount: 0 };
+const initialValue: TCartState = { items: [], sum: 0, total: 0, discount: 1 };
 // this is the value passed to the context
 export const CartContext = createContext<TSore>({
   cart: initialValue,
@@ -34,6 +34,16 @@ const reducer = (state: TCartState, action: TCartAction): TCartState => {
   switch (action.type) {
     case "set_items":
       state = { ...state, items: action.payload };
+      break;
+
+    case "reset_items":
+      state = {
+        ...state,
+        items: state.items.map((item) => ({ ...item, selected: false })),
+        sum: 0,
+        total: 0,
+        discount: 1,
+      };
       break;
 
     case "toggle_item":

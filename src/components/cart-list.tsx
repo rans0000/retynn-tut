@@ -7,32 +7,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { TItem } from "@/lib/types";
-
-const items: TItem[] = [
-  {
-    id: 0,
-    title: "string",
-    price: 0.1,
-    description: "string",
-    category: "string",
-    image: "http://example.com",
-    selected: false,
-  },
-  {
-    id: 1,
-    title: "string",
-    price: 0.1,
-    description: "string",
-    category: "string",
-    image: "http://example.com",
-    selected: true,
-  },
-];
+import { retynConstants } from "@/lib/constant";
+import { CartContext } from "@/providers/cart-provider";
+import { useContext } from "react";
 
 function CartList() {
+  const { cart } = useContext(CartContext);
+
   return (
-    <Table>
+    <Table className="table-fixed">
       <TableHeader>
         <TableRow>
           <TableHead className="font-bold">Item</TableHead>
@@ -40,32 +23,38 @@ function CartList() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {items.length > 0 &&
-          items.map((item) => (
-            <TableRow key={item.id}>
-              <TableCell>{item.title}</TableCell>
-              <TableCell className="text-right">
-                $ {item.price.toFixed(2)}
-              </TableCell>
-            </TableRow>
-          ))}
+        {cart.items.length > 0 &&
+          cart.items
+            .filter((item) => item.selected)
+            .map((item) => (
+              <TableRow key={item.id}>
+                <TableCell className="overflow-hidden text-ellipsis">
+                  {item.title}
+                </TableCell>
+                <TableCell className="text-right font-mono">
+                  $ {item.price.toFixed(2)}
+                </TableCell>
+              </TableRow>
+            ))}
       </TableBody>
       <TableFooter>
-        <TableRow>
-          <TableCell>Dicount</TableCell>
-          <TableCell className="text-right">$ 30.00 (5%)</TableCell>
-        </TableRow>
+        {cart.discount !== 1 && (
+          <TableRow>
+            <TableCell>Dicount</TableCell>
+            <TableCell className="text-right font-mono">
+              $ {(cart.sum * (1 - cart.discount)).toFixed(2)} (
+              {retynConstants.discountPercentage * 100}%)
+            </TableCell>
+          </TableRow>
+        )}
         <TableRow>
           <TableCell>
-            <span className="font-bold">
-              Total{" "}
-              <span className="font-normal text-xs text-gray-600 pr-1.5">
-                ($200.00 - $10.00)
-              </span>
-            </span>
+            <span className="font-bold">Total</span>
           </TableCell>
           <TableCell className="text-right align-middle">
-            <span className="font-bold">$190.00</span>
+            <span className="font-bold font-mono">
+              ${(cart.sum * cart.discount).toFixed(2)}
+            </span>
           </TableCell>
         </TableRow>
       </TableFooter>

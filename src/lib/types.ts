@@ -22,6 +22,8 @@ export type TCartState = {
   total: number;
   discount: number;
 };
+// we can make sure our dispatch accepts only the right combination of arguments.
 export type TCartAction =
   | { type: "set_items"; payload: TItem[] }
-  | { type: "toggle_item"; payload: TItem };
+  | { type: "toggle_item"; payload: TItem }
+  | { type: "reset_items" };
