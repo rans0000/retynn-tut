@@ -1,21 +1,17 @@
 import ShoppingList from "@/components/shopping-list";
-import { retynConstants } from "@/lib/constant";
-import { TItem } from "@/lib/types";
-
-const fetchItems = async () => {
-  try {
-    return fetch(`${retynConstants.url}/products`)
-      .then((response) => response.json())
-      .then((data: TItem[]) =>
-        data.map((item) => ({ ...item, selected: false })).splice(0, 10)
-      );
-  } catch {
-    return [];
-  }
-};
+import { fetchProducts } from "@/data-loaders/product-data";
 
 export default async function HomePage() {
-  const items = await fetchItems();
+  /**
+   * Note: this page is server rendered.
+   * the data will be loaded once in the server and then complete HTML sent to the browser
+   * <ShoppingList /> is a client component to which we are sending the props (from the server)
+   * normally await requires a try...catch and handle error messages
+   * similar to how we tackle useActionState
+   */
+
+  const items = await fetchProducts(10);
+  console.log("yay");
 
   return (
     <div className="home">

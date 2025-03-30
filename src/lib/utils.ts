@@ -8,6 +8,11 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const getCartCalculation = (state: TCartState) => {
+  /**
+   * This method accepts the modified items (selected prop update) and calculates the sum, total & discount.
+   * We'll use the Array.reducer to aggregate the values of the list
+   */
+
   const { sum, total } = state.items.reduce(
     (acc, curr) => {
       return curr.selected

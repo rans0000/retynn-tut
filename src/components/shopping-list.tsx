@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
@@ -10,10 +12,24 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { TItem } from "@/lib/types";
+import { CartContext } from "@/providers/cart-provider";
+import { useContext, useEffect } from "react";
 
 type TProps = { items: TItem[] };
 
+/**
+ * This is a client component to which the server sents the props.
+ * We load the data into the context (state) so we can manipulate it.
+ */
+
 function ShoppingList({ items }: TProps) {
+  const { cart, dispatch } = useContext(CartContext);
+
+  useEffect(() => {
+    // load data into the context on component load
+    dispatch({ type: "set_items", payload: items });
+  }, []);
+
   return (
     <div className="shopping-list-wrapper px-5 pt-10">
       <Table className="table-fixed">
@@ -25,20 +41,23 @@ function ShoppingList({ items }: TProps) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {items.length === 0 && (
+          {cart.items.length === 0 && (
             <TableRow>
               <TableCell colSpan={3} className="h-24 text-center">
                 No shopping items!!.
               </TableCell>
             </TableRow>
           )}
-          {items.length > 0 &&
-            items.map((item) => (
+          {cart.items.length > 0 &&
+            cart.items.map((item) => (
               <TableRow key={item.id}>
                 <TableCell className="align-middle">
                   <Checkbox
                     className="cursor-pointer"
                     checked={item.selected}
+                    onCheckedChange={() =>
+                      dispatch({ type: "toggle_item", payload: item })
+                    }
                   />
                 </TableCell>
                 <TableCell className="text-ellipsis overflow-hidden">
@@ -55,7 +74,7 @@ function ShoppingList({ items }: TProps) {
       <Button
         variant="outline"
         type="button"
-        disabled={items.length === 0}
+        disabled={cart.items.length === 0}
         className="cursor-pointer"
       >
         Buy Items
