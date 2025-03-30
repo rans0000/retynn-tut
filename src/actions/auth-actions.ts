@@ -31,7 +31,7 @@ export const authenticateUser = async (
    *   if user data is valid, set the auth cookies and redirect him to the home page.
    * the middleware will notice the cookie and will make sure it reaches the protected pages.
    * this is an http only cookie, to make sure clients don't have access to this.
-   * the expires prop makes sure that the cookie becomes invalid after the given interval.
+   * the expires/maxAge prop makes sure that the cookie becomes invalid after the given interval.
    *
    * since this is a simple project, we wont be using any encryption.
    * In production, always encrypt sensitive data like clientkeys, env vars etc if they are accessible to outsiders.
@@ -43,7 +43,7 @@ export const authenticateUser = async (
     value: email,
     httpOnly: true,
     path: "/",
-    expires: 60,
+    maxAge: 60 * 60, // expires in 1 hour
   });
 
   redirect("/");
