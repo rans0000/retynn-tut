@@ -11,31 +11,12 @@ import {
 } from "@/components/ui/table";
 import { TItem } from "@/lib/types";
 
-const items: TItem[] = [
-  {
-    id: 0,
-    title: "string",
-    price: 0.1,
-    description: "string",
-    category: "string",
-    image: "http://example.com",
-    selected: false,
-  },
-  {
-    id: 1,
-    title: "string",
-    price: 0.1,
-    description: "string",
-    category: "string",
-    image: "http://example.com",
-    selected: true,
-  },
-];
+type TProps = { items: TItem[] };
 
-function ShoppingList() {
+function ShoppingList({ items }: TProps) {
   return (
     <div className="shopping-list-wrapper px-5 pt-10">
-      <Table>
+      <Table className="table-fixed">
         <TableHeader>
           <TableRow>
             <TableHead className="w-[50px] font-bold"></TableHead>
@@ -55,9 +36,14 @@ function ShoppingList() {
             items.map((item) => (
               <TableRow key={item.id}>
                 <TableCell className="align-middle">
-                  <Checkbox checked={item.selected} />
+                  <Checkbox
+                    className="cursor-pointer"
+                    checked={item.selected}
+                  />
                 </TableCell>
-                <TableCell>{item.title}</TableCell>
+                <TableCell className="text-ellipsis overflow-hidden">
+                  {item.title}
+                </TableCell>
                 <TableCell className="text-right">
                   $ {item.price.toFixed(2)}
                 </TableCell>

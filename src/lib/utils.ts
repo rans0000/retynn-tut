@@ -23,6 +23,6 @@ export const getCartCalculation = (state: TCartState) => {
     discount:
       total > retynConstants.discountQualifier
         ? 1 - retynConstants.discountPercentage
-        : 0,
+        : 1,
   };
 };
