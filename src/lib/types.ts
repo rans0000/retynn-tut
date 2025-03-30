@@ -7,3 +7,8 @@ export type TItem = {
   image: string;
   selected: boolean;
 };
+
+export type TAuthFormState = {
+  email: string;
+  error?: string;
+};

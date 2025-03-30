@@ -16,7 +16,7 @@ function HeaderStatus() {
           Logout
         </Button>
       </div>
-      <ShoppingCartDialog isOopen={true} />
+      <ShoppingCartDialog isOopen={false} />
     </>
   );
 }
