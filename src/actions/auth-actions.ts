@@ -48,3 +48,8 @@ export const authenticateUser = async (
 
   redirect("/");
 };
+
+export const logoutUser = async () => {
+  (await cookies()).delete("userId");
+  redirect("/login");
+};

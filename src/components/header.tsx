@@ -4,7 +4,7 @@ import HeaderStatus from "./header-status";
 
 function Header() {
   return (
-    <header className="header-wrapper  fixed w-full h-14  px-2 flex justify-between items-center gap-5 shadow-md">
+    <header className="header-wrapper  fixed w-full h-14  px-2 flex justify-between items-center gap-5 shadow-md shadow-blue-100">
       <span className="font-bold">Shopper</span>
       <nav className="ml-auto flex gap-2">
         <Link href="/">Home</Link>
