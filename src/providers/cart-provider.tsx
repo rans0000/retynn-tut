@@ -23,7 +23,13 @@ export const CartContext = createContext<TSore>({
   dispatch: () => {},
 });
 
-// the reducer function
+/**
+ * the reducer function
+ * usually depended data like sum should be calculated dynamically in the JSX and not created in the state.
+ * But since the calculation is complicated and is used in more than one component, we're extracting it into a state.
+ * Since the sum, total etc are dependent on the items,
+ * we'll use a single 'useReducer' hook instead of multiple 'useState' hooks.
+ */
 const reducer = (state: TCartState, action: TCartAction): TCartState => {
   switch (action.type) {
     case "set_items":

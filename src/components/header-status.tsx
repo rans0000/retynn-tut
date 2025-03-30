@@ -16,8 +16,8 @@ function HeaderStatus() {
         <Badge variant="secondary">
           <span className="font-semibold">My Cart</span>
           {cart.total > 0 && (
-            <span className="text-right">
-              ({cart.total}) - $ {cart.sum * cart.discount}
+            <span className="text-right font-mono">
+              ({cart.total}) - $ {(cart.sum * cart.discount).toFixed(2)}
             </span>
           )}
         </Badge>

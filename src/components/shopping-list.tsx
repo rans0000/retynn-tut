@@ -63,7 +63,7 @@ function ShoppingList({ items }: TProps) {
                 <TableCell className="text-ellipsis overflow-hidden">
                   {item.title}
                 </TableCell>
-                <TableCell className="text-right">
+                <TableCell className="text-right font-mono">
                   $ {item.price.toFixed(2)}
                 </TableCell>
               </TableRow>
