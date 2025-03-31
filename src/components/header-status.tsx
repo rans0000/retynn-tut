@@ -1,20 +1,11 @@
 "use client";
 
-import { logoutUser } from "@/actions/auth-actions";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { CartContext } from "@/providers/cart-provider";
 import { useContext } from "react";
 
 function HeaderStatus() {
-  const { cart, dispatch } = useContext(CartContext);
-
-  const onLogout = async () => {
-    // we'll use the server actions to clear the auth cookie & route to '/login'
-    dispatch({ type: "reset_items" });
-    await logoutUser();
-  };
+  const { cart } = useContext(CartContext);
 
   return (
     <div className="heaer-status flex gap-1 items-center">
@@ -26,15 +17,6 @@ function HeaderStatus() {
           </span>
         )}
       </Badge>
-      <Separator decorative orientation="vertical" />
-      <Button
-        type="button"
-        variant="link"
-        className="cursor-pointer"
-        onClick={onLogout}
-      >
-        Logout
-      </Button>
     </div>
   );
 }

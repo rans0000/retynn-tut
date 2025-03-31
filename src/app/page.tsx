@@ -1,5 +1,6 @@
 import ShoppingList from "@/components/shopping-list";
 import { fetchProducts } from "@/data-loaders/product-data";
+import { Suspense } from "react";
 
 export default async function HomePage() {
   /**
@@ -11,13 +12,14 @@ export default async function HomePage() {
    */
 
   const items = await fetchProducts(10);
-  console.log("yay");
 
   return (
-    <div className="home">
-      <div className="shopper-container max-w-xl">
-        <ShoppingList items={items} />
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="home">
+        <div className="shopper-container max-w-xl">
+          <ShoppingList items={items} />
+        </div>
       </div>
-    </div>
+    </Suspense>
   );
 }

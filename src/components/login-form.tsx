@@ -40,9 +40,7 @@ function LoginForm() {
                 defaultValue={state.email}
               />
               {state.error && (
-                <span className="text-xs text-red-500">
-                  User name is wrong!!
-                </span>
+                <span className="text-xs text-red-500">{state.error}</span>
               )}
             </div>
           </div>
