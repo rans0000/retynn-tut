@@ -61,7 +61,7 @@ function ShoppingList({ items }: TProps) {
                 <TableRow key={item.id}>
                   <TableCell className="align-middle">
                     <Checkbox
-                      className="cursor-pointer"
+                      className="cursor-pointer border-gray-500"
                       checked={item.selected}
                       onCheckedChange={() =>
                         dispatch({ type: "toggle_item", payload: item })
